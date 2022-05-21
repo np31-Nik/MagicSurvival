@@ -20,9 +20,14 @@ public class PlayerDamageHandler : MonoBehaviour
     Color blinkColor = new Color(1f, 1f, 1f, .5f);
     CircleCollider2D hitbox;
     SpriteRenderer sprite;
+    public GameObject gameover;
+    Healthbar healthbar;
 
-    void Start()
+    void Awake()
     {
+        healthbar = GameObject.Find("Healthbar").GetComponent<Healthbar>();
+        healthbar.ChangeDmgHandler(this);
+        healthbar.set(maxHealth, maxHealth);
         sprite = GetComponent<SpriteRenderer>();
         hitbox = GetComponent<CircleCollider2D>();
         health = maxHealth;
@@ -31,15 +36,23 @@ public class PlayerDamageHandler : MonoBehaviour
         //SaludScript.ChangeDmgHandler(this);
     }
 
+    public void setGameOver(GameObject g)
+    {
+        gameover = g;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
         {
             health--;
-            //healthBar.damage(1);
+            healthbar.damage(1);
             if (health <= 0)
             {
                 //Instantiate(explosion, transform.position, transform.rotation);
+                gameover.SetActive(true);
+                GameObject.Find("TimeManager").GetComponent<TimeManager>().changeScale(0f);
+                GameObject.Find("Spawner").GetComponent<Spawner>().stopSpawn();
                 Destroy(gameObject);
             }
             invulnTimer = invulnPeriod;

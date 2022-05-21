@@ -6,20 +6,21 @@ public class Spawner : MonoBehaviour
 {
     public GameObject enemy;
 
-    public float enemyInterval = 5f;
+    public float enemyInterval = 2f;
         
     private void Start()
     {
         InvokeRepeating("spawn", enemyInterval, enemyInterval);
     }
 
-    void Update()
-    {
-
-    }
-
     void spawn()
     {
+        if(Time.timeScale!=0.0)
         Instantiate(enemy);
+    }
+
+    public void stopSpawn()
+    {
+        CancelInvoke();
     }
 }

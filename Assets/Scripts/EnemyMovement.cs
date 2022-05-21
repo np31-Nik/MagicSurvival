@@ -13,21 +13,27 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        if(p)
+            player = p.transform;
     }
 
     void Update()
     {
-        Vector3 direction = player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.rotation = angle;
-        direction.Normalize();
-        movement = direction;
+        if (player)
+        {
+            Vector3 direction = player.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            rb.rotation = angle;
+            direction.Normalize();
+            movement = direction;
+        }
     }
 
     private void FixedUpdate()
     {
-        moveCharacter(movement);
+        if(player)
+            moveCharacter(movement);
     }
     void moveCharacter(Vector2 direction)
     {

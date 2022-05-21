@@ -26,19 +26,17 @@ public class PlayerShoot : MonoBehaviour
     {
         Vector3 offset = new Vector3(0, pHeight, 0);
         GameObject closest = findNearestEnemy();
-       
-        Quaternion q = aimNearest(closest.transform);
+        if (closest)
+        {
+            Quaternion q = aimNearest(closest.transform);
+        }
 
         cooldownTimer -= Time.deltaTime;
 
         if (cooldownTimer <= 0 && Input.GetButtonDown("Fire1"))
         {
             cooldownTimer = fireDelay;
-
-            if (closest)
-            {
-                Instantiate(bulletPrefab, transform.position, transform.rotation);
-            }
+            Instantiate(bulletPrefab, transform.position, transform.rotation);
         }
     }
 
