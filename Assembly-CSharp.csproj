@@ -57,12 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerDamageHandler.cs" />
+    <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\CircleProjectile.cs" />
     <Compile Include="Assets\Scripts\EnemyDamageHandler.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Parry.cs" />
+    <Compile Include="Assets\Scripts\ParryDetect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

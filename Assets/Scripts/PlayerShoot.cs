@@ -24,17 +24,19 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
+        Vector3 offset = new Vector3(0, pHeight, 0);
+        GameObject closest = findNearestEnemy();
+       
+        Quaternion q = aimNearest(closest.transform);
+
         cooldownTimer -= Time.deltaTime;
 
-        if (cooldownTimer <= 0)
+        if (cooldownTimer <= 0 && Input.GetButtonDown("Fire1"))
         {
             cooldownTimer = fireDelay;
 
-            Vector3 offset = new Vector3(0, pHeight, 0);
-            GameObject closest = findNearestEnemy();
             if (closest)
             {
-                Quaternion q = aimNearest(closest.transform);
                 Instantiate(bulletPrefab, transform.position, transform.rotation);
             }
         }
@@ -74,36 +76,5 @@ public class PlayerShoot : MonoBehaviour
 
         }
         return closestEnemy;
-
-
-
-
-
-
-
-
-
-
-
-
-        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        //GameObject closest;
-
-        //if (enemies.Length == 0)
-        //{
-        //    return null;
-        //}else if (enemies.Length == 1)
-        //{
-        //    closest = enemies[0];
-        //    Instantiate(target, closest.transform);
-        //}
-        //else
-        //{
-        //    closest = enemies.OrderBy(go => (transform.position - go.transform.position)).First();
-        //    Instantiate(target, closest.transform);
-
-        //}
-
-        //return closest;
     }
 }

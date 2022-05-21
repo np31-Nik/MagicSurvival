@@ -11,6 +11,12 @@ public class CircleProjectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag != "Player")
+        Destroy(gameObject);
+    }
+
     void Update()
     {
         Vector3 pos = transform.position;
